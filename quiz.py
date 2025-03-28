@@ -13,7 +13,7 @@ WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyWVfGFF22VGe0O6t6IzeAmpP
 GOOGLE_SHEET_URL = "https://docs.google.com/spreadsheets/d/1Rhyx-RINPq6qX8TL1l42LpYuk7oVy5QMdQaUiY2ciAE/gviz/tq?tqx=out:json"
 DATA_URL = "https://docs.google.com/spreadsheets/d/1Q2UHyfAliAWxbd4p-jSrVfSjxbzz5s23MwGYtyN_3rg/gviz/tq?tqx=out:json"
 
-ICON_URL = "https://github.com/username/repository/raw/main/icon.ico"
+ICON_URL = "https://raw.githubusercontent.com/Ungotable/asdasdasdasdasd/refs/heads/main/icon.ico"
 
 def download_icon(url, filename="icon.ico"):
     try:
