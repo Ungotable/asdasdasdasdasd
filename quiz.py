@@ -272,7 +272,6 @@ class QuizApp:
         for btn in self.buttons:
             btn.config(state="disabled")
 
-        # Hapus tombol retry sebelumnya jika ada
         for widget in self.root.winfo_children():
             if isinstance(widget, tk.Button) and widget.cget("text") == "Retry":
                 widget.destroy()
