@@ -12,6 +12,20 @@ import threading
 WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyWVfGFF22VGe0O6t6IzeAmpPnqA5oKfm2lKndhPeTastKOaUORq-MMbYrYpBcHZr75/exec"
 GOOGLE_SHEET_URL = "https://docs.google.com/spreadsheets/d/1Rhyx-RINPq6qX8TL1l42LpYuk7oVy5QMdQaUiY2ciAE/gviz/tq?tqx=out:json"
 DATA_URL = "https://docs.google.com/spreadsheets/d/1Q2UHyfAliAWxbd4p-jSrVfSjxbzz5s23MwGYtyN_3rg/gviz/tq?tqx=out:json"
+
+ICON_URL = "https://github.com/username/repository/raw/main/icon.ico"
+
+def download_icon(url, filename="icon.ico"):
+    try:
+        response = requests.get(url)
+        response.raise_for_status() 
+        with open(filename, "wb") as file:
+            file.write(response.content)
+        return filename
+    except requests.RequestException as e:
+        messagebox.showerror("Error", f"Failed to download icon: {e}")
+        return None
+
 def encrypt_password(password):
     return hashlib.sha256(password.encode()).hexdigest()
 
@@ -87,19 +101,15 @@ def login(username, password, ip):
 
 def authenticate():
     root = tk.Tk()
-    root.withdraw()  # Hide the main window
+    root.withdraw() 
 
-    # Get the user's IP
     user_ip = get_user_ip()
 
-    # Check if the IP is registered and retrieve the associated username
     username = get_username_by_ip(user_ip)
     
-    # If a username is found for the IP, auto login
     if username:
         return username, ""
 
-    # If no username is found, prompt the user to log in or register
     while True:
         choice = simpledialog.askstring("Welcome", "Type 'login' to log in, or 'register' to create an account:")
         if choice and choice.lower() == "register":
@@ -182,7 +192,9 @@ class QuizApp:
         self.root.geometry("800x600")
         self.root.minsize(800, 600)
         self.root.configure(bg="#f4f4f4")
-        self.root.iconbitmap("icon.ico")
+        icon_file = download_icon(ICON_URL)
+        if icon_file:
+            self.root.iconbitmap(icon_file)
 
         self.font_main = ("Helvetica", 14)
         self.font_button = ("Helvetica", 12, "bold")
@@ -283,7 +295,9 @@ class MainMenu:
     def __init__(self, root, username):
         self.root = root
         self.root.title("Main Menu")
-        self.root.iconbitmap("icon.ico")
+        icon_file = download_icon(ICON_URL)
+        if icon_file:
+            self.root.iconbitmap(icon_file)
         self.root.geometry("600x400")  
         self.root.minsize(600, 400) 
         self.username = username
